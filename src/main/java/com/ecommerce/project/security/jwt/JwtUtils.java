@@ -45,10 +45,10 @@ public class JwtUtils {
     // Generate the Cookie and assign it to only /api endpoints
     public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60)
+        // return the cookie directly using jwt
+        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60)
                 .httpOnly(false)
                 .build();
-        return cookie;
     }
 
     // return a clean JwtCookie
